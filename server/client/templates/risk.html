@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Risk Result</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-heartbeat mr-2"></i>Cancer Risk Predictor</a>
+            <div class="navbar-nav ml-auto">
+                <span class="navbar-text mr-3"><i class="fas fa-user mr-2"></i>{{ patient.username }}</span>
+                <a href="{{ url_for('history') }}" class="nav-item nav-link"><i class="fas fa-history mr-2"></i>History</a>
+                <a href="{{ url_for('logout') }}" class="nav-item nav-link"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card risk-result">
+            <h2 class="text-center mb-4"><i class="fas fa-chart-line mr-2"></i>Risk Assessment Results</h2>
+            
+            <div class="risk-value">
+                {{ patient.risk_percentage }}%
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <p><i class="fas fa-hashtag mr-2"></i><strong>Record No:</strong> {{ patient.db_no }}</p>
+                    <p><i class="fas fa-user mr-2"></i><strong>Username:</strong> {{ patient.username }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><i class="fas fa-calendar-alt mr-2"></i><strong>Date:</strong> {{ patient.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} UTC</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="/history" class="btn btn-secondary mr-2">
+                    <i class="fas fa-history mr-2"></i>View History
+                </a>
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-plus mr-2"></i>New Prediction
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

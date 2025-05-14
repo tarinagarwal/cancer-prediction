@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Risk Predictor</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-heartbeat mr-2"></i>Cancer Risk Predictor</a>
+            <div class="navbar-nav ml-auto">
+                <span class="navbar-text mr-3"><i class="fas fa-user mr-2"></i>{{ username }}</span>
+                <a href="{{ url_for('history') }}" class="nav-item nav-link"><i class="fas fa-history mr-2"></i>History</a>
+                <a href="{{ url_for('logout') }}" class="nav-item nav-link"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card">
+            <h1 class="text-center mb-4">Health Risk Assessment</h1>
+            <form id="riskForm" action="/predict_risk" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="ageInput"><i class="fas fa-birthday-cake mr-2"></i>Age (years)</label>
+                            <input type="number" class="form-control" id="ageInput" name="age" min="0" max="100" step="1" value="50" required>
+                            <input type="range" class="form-control-range mt-2" id="ageSlider" min="0" max="100" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="sex"><i class="fas fa-venus-mars mr-2"></i>Gender</label>
+                            <select class="form-control" id="sex" name="sex" required>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="height"><i class="fas fa-ruler-vertical mr-2"></i>Height (m)</label>
+                            <input type="number" class="form-control" id="height" name="height" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight"><i class="fas fa-weight mr-2"></i>Weight (kg)</label>
+                            <input type="number" class="form-control" id="weight" name="weight" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="alcohol"><i class="fas fa-wine-glass-alt mr-2"></i>Alcohol (units/week)</label>
+                            <input type="number" class="form-control" id="alcohol" name="alcohol_consumption" step="0.1" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="smoking"><i class="fas fa-smoking mr-2"></i>Smoking</label>
+                            <select class="form-control" id="smoking" name="smoking" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="geneticRisk"><i class="fas fa-dna mr-2"></i>Genetic Risk</label>
+                            <select class="form-control" id="geneticRisk" name="genetic_risk" required>
+                                <option value="0">Low</option>
+                                <option value="1">Medium</option>
+                                <option value="2">High</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="physicalActivity"><i class="fas fa-running mr-2"></i>Physical Activity (hrs/week)</label>
+                            <input type="number" class="form-control" id="physicalActivity" name="physical_activity" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="diabetes"><i class="fas fa-tint mr-2"></i>Diabetes</label>
+                            <select class="form-control" id="diabetes" name="diabetes" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="hypertension"><i class="fas fa-heart mr-2"></i>Hypertension</label>
+                            <select class="form-control" id="hypertension" name="hypertension" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
+                    <i class="fas fa-calculator mr-2"></i>Calculate Risk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
