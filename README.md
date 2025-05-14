@@ -108,7 +108,11 @@ The application is configured for deployment on Vercel with Python runtime suppo
 
 ## Development Setup
 
-1. Add your MongoDB URI in server/config.py
+1. Create a .env file in server directory and add your MONGO_URI there: 
+
+```bash
+MONGO_URI="your_mongodb_uri_here"
+```
 
 2. Install Python dependencies:
 

@@ -1,15 +1,20 @@
 from flask import Flask, request, render_template, redirect, url_for, session, flash
 from pymongo import MongoClient, ReturnDocument
 from werkzeug.security import generate_password_hash, check_password_hash
-import util, config
+import util
 from datetime import datetime
 from functools import wraps
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__, template_folder='client/templates', static_folder='client/static')
 app.secret_key = 'your-secret-key-here'  # Required for sessions
 
 # MongoDB setup
-client = MongoClient(config.MONGO_URI)
+client = MongoClient(os.getenv('MONGO_URI'))
 db = client['cancer_db']
 records = db['risk_records']
 users = db['users']
@@ -133,4 +138,4 @@ def page_not_found(e):
     return util.apology("Page not found", 404)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) 

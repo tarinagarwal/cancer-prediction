@@ -1,8 +1,11 @@
-# init_db.py
 from pymongo import MongoClient
-import config
+from dotenv import load_dotenv
+import os
 
-client = MongoClient(config.MONGO_URI)
+# Load environment variables
+load_dotenv()
+
+client = MongoClient(os.getenv('MONGO_URI'))
 db = client['cancer_db']
 
 if not db.counters.find_one({'_id': 'risk_records'}):
